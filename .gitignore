@@ -26,4 +26,4 @@ yarn-error.log
 
 # Arduino
 ######################
-*.ino.*  # Temporary files created by Arduino IDE
+#*.ino.*  # Temporary files created by Arduino IDE
