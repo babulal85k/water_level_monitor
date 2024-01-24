@@ -1,16 +1,19 @@
 #include "BlynkConfig.h"
 #include <ESP8266WiFi.h>
 #include <BlynkSimpleEsp8266.h>
-#include <DHT.h>
 
-#define DHT_PIN D3 // Replace with the GPIO pin where the DHT sensor is connected
-#define DHT_TYPE DHT11 // DHT sensor type (DHT11 or DHT22)
 
-DHT dht(DHT_PIN, DHT_TYPE);
+
+
+// #define DHT_PIN D3 // Replace with the GPIO pin where the DHT sensor is connected
+// #define DHT_TYPE DHT11 // DHT sensor type (DHT11 or DHT22)
+
+// DHT dht(DHT_PIN, DHT_TYPE);
 
 // Ultrasonic Sensor Pins
 const int trigPin = D1;
 const int echoPin = D2;
+
 
 // Default password for other networks
 const char* defaultPass = "12345678";
@@ -53,7 +56,7 @@ void measureDistance() {
 
   // Measure the pulse duration
   long duration = pulseIn(echoPin, HIGH);
-
+  
   // Calculate the distance in centimeters
   float distance_cm = duration * 0.034 / 2.0;
 
@@ -70,15 +73,16 @@ void measureDistance() {
     Blynk.virtualWrite(V1, "Distance: " + String(distance_cm) + " cm");
 
     // Additional data to print on the Blynk Terminal
-    float temperature = readTemperature();  // Replace with your temperature reading code
-    int humidity = readHumidity();          // Replace with your humidity reading code
+    // float temperature = readTemperature();  // Replace with your temperature reading code
+    // int humidity = readHumidity();          // Replace with your humidity reading code
 
-    Blynk.virtualWrite(V1, "Temperature: " + String(temperature) + " °C");
-    Blynk.virtualWrite(V1, "Humidity: " + String(humidity) + " %");
+    // Blynk.virtualWrite(V1, "Temperature: " + String(temperature) + " °C");
+    // Blynk.virtualWrite(V1, "Humidity: " + String(humidity) + " %");
   } else {
     // Invalid reading, possibly out of range or sensor error
     Serial.println("Invalid distance reading");
   }
+  delay(1000);
 }
 
 
@@ -134,20 +138,20 @@ void reconnectWiFi() {
   }
 }
 
-float readTemperature() {
-  float temperature = dht.readTemperature(); // Read temperature from DHT sensor
-  if (isnan(temperature)) {
-    Serial.println("Failed to read temperature from DHT sensor");
-    return -1.0; // Return an error value
-  }
-  return temperature; // Return the temperature value
-}
+// float readTemperature() {
+//   float temperature = dht.readTemperature(); // Read temperature from DHT sensor
+//   if (isnan(temperature)) {
+//     Serial.println("Failed to read temperature from DHT sensor");
+//     return -1.0; // Return an error value
+//   }
+//   return temperature; // Return the temperature value
+// }
 
-float readHumidity() {
-  float humidity = dht.readHumidity(); // Read humidity from DHT sensor
-  if (isnan(humidity)) {
-    Serial.println("Failed to read humidity from DHT sensor");
-    return -1.0; // Return an error value
-  }
-  return humidity; // Return the humidity value
-}
+// float readHumidity() {
+//   float humidity = dht.readHumidity(); // Read humidity from DHT sensor
+//   if (isnan(humidity)) {
+//     Serial.println("Failed to read humidity from DHT sensor");
+//     return -1.0; // Return an error value
+//   }
+//   return humidity; // Return the humidity value
+// }
