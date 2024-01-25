@@ -6,10 +6,10 @@ $(document).ready(function() {
             var heightPercentage = (waterLevel / maxHeight) * 100;
 
             $('#waterLevelBar').css('height', heightPercentage + '%');
-            $('#waterLevel').text('Water Level: ' + waterLevel + ' units');
+            $('#waterLevel').text('Water Level: ' + (100 - waterLevel) + ' %');
         });
     }
 
-    setInterval(fetchWaterLevel, 5000);
+    setInterval(fetchWaterLevel, 60000);
     fetchWaterLevel();
 });
